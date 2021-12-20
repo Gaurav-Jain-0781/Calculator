@@ -1,13 +1,29 @@
 import tkinter as tk
-# from frame1_functions import display_entry
+import re
+
+
+def operate():
+    data = entry.get()
+    pattern = re.search("[0-9,.]*"+"[0-9]*", data)
+    first_value = pattern[0]
+    # operator = pattern[1]
+    # second_value = pattern[2]
+    print(pattern)
+    # print(operator)
+    # print(second_value)
+    print(first_value)
 
 
 def delete_last_entry():
-    entry.delete("end-1", "end")
+    data = entry.get()
+    data_list = []
+    for d in data:
+        data_list.append(d)
+    entry.delete(len(data_list)-1, "end")
 
 
 def delete_all():
-    pass
+    entry.delete(0, "end")
 
 
 def display_entry(value):
@@ -82,7 +98,7 @@ two.pack(side="right", fill="both", padx=2, pady=2, expand=True)
 one = tk.Button(frame1, text="1", height=3, width=14, command=lambda: display_entry(1))
 one.pack(side="right", fill="both", padx=2, pady=2, expand=True)
 
-equals_to = tk.Button(frame4, text="=", height=3, width=14)
+equals_to = tk.Button(frame4, text="=", height=3, width=14, command=lambda: operate())
 equals_to.pack(side="right", fill="both", padx=2, pady=2, expand=True)
 
 point = tk.Button(frame4, text=".", height=3, width=14, command=lambda: display_entry("."))
