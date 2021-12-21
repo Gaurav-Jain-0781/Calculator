@@ -4,14 +4,17 @@ import re
 
 def operate():
     data = entry.get()
-    pattern = re.search("[0-9,.]*"+"[0-9]*", data)
-    first_value = pattern[0]
-    # operator = pattern[1]
-    # second_value = pattern[2]
-    print(pattern)
-    # print(operator)
-    # print(second_value)
-    print(first_value)
+    pattern = re.search("([0-9,.]*)([\W])([0-9]*)", data)
+    first_value = pattern[1]
+    operator = pattern[2]
+    second_value = pattern[3]
+    result(first_value, operator, second_value)
+
+
+def result(first_value, operator, second_value):
+    fv = int(first_value)
+    sv = int(second_value)
+    pass
 
 
 def delete_last_entry():
