@@ -1,20 +1,38 @@
 import tkinter as tk
 import re
+import tkinter.font as font
 
 
 def operate():
     data = entry.get()
-    pattern = re.search("([0-9,.]*)([\W])([0-9]*)", data)
+    pattern = re.search("([0-9,.]*)([\W])([0-9]*)([\W]?)", data)
     first_value = pattern[1]
     operator = pattern[2]
     second_value = pattern[3]
-    result(first_value, operator, second_value)
+    special_operator = pattern[4]
+    result(first_value, operator, second_value, special_operator)
 
 
-def result(first_value, operator, second_value):
-    fv = int(first_value)
-    sv = int(second_value)
-    pass
+def result(first_value, operator, second_value, so):
+    fv = float(first_value)
+    sv = float(second_value)
+    operator_type = operator
+    second_time_operator = so
+    entry.delete(0, "end")
+    result_displayed = 0
+    if second_time_operator:
+        to_be_multiplied_with = sv / 100
+        result_displayed = fv * to_be_multiplied_with
+    else:
+        if operator_type == "+":
+            result_displayed = fv + sv
+        elif operator_type == "-":
+            result_displayed = fv - sv
+        elif operator_type == "*":
+            result_displayed = fv * sv
+        else:
+            result_displayed = fv / sv
+    entry.insert(0, result_displayed)
 
 
 def delete_last_entry():
